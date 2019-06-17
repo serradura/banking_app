@@ -2,9 +2,13 @@ use Mix.Config
 
 # Configure your database
 config :banking_app, BankingApp.Repo,
-  username: "postgres",
-  password: "postgres",
   database: "banking_app_test",
+  hostname: "localhost",
+  pool: Ecto.Adapters.SQL.Sandbox
+
+  config :eventstore, EventStore.Storage,
+  serializer: Commanded.Serialization.JsonSerializer,
+  database: "banking_app_eventstore_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
