@@ -25,6 +25,8 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :comeonin, :bcrypt_log_rounds, 4
+
 config :commanded,
    event_store_adapter: Commanded.EventStore.Adapters.EventStore
 

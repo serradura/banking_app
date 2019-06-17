@@ -45,7 +45,9 @@ defmodule BankingApp.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:eventstore, "~> 0.16.2"},
       {:commanded, "~> 0.18.1"},
-      {:commanded_eventstore_adapter, "~> 0.5.0"}
+      {:commanded_eventstore_adapter, "~> 0.5.0"},
+      {:comeonin, "~> 5.1"},
+      {:bcrypt_elixir, "~> 2.0"},
     ]
   end
 
