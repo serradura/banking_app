@@ -21,16 +21,20 @@ defmodule BankingApp.DataCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+      import BankingApp.Factory
       import BankingApp.DataCase
+      import Commanded.Assertions.EventAssertions
     end
   end
 
-  setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(BankingApp.Repo)
+  setup _tags do
+    :ok = Application.stop(:banking_app)
+    :ok = Application.stop(:commanded)
+    :ok = Application.stop(:eventstore)
 
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(BankingApp.Repo, {:shared, self()})
-    end
+    BankingApp.Storage.reset!()
+
+    {:ok, _} = Application.ensure_all_started(:banking_app)
 
     :ok
   end

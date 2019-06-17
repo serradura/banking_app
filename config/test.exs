@@ -4,13 +4,13 @@ use Mix.Config
 config :banking_app, BankingApp.Repo,
   database: "banking_app_test",
   hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool_size: 1
 
   config :eventstore, EventStore.Storage,
   serializer: Commanded.Serialization.JsonSerializer,
   database: "banking_app_eventstore_test",
   hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool_size: 1
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
