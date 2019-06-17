@@ -27,7 +27,8 @@ defmodule BankingApp.Storage do
   defp truncate_readstore_tables do
     """
     TRUNCATE TABLE
-      accounts_users
+      accounts_users,
+      projection_versions
     RESTART IDENTITY
     CASCADE;
     """
