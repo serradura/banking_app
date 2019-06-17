@@ -20,3 +20,5 @@ config :banking_app, BankingAppWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :banking_app, consistency: :strong

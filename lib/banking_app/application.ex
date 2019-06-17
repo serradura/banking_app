@@ -6,14 +6,18 @@ defmodule BankingApp.Application do
   use Application
 
   def start(_type, _args) do
+    import Supervisor.Spec
+
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
-      BankingApp.Repo,
+      supervisor(BankingApp.Repo, []),
       # Start the endpoint when the application starts
-      BankingAppWeb.Endpoint
+      supervisor(BankingAppWeb.Endpoint, []),
       # Starts a worker by calling: BankingApp.Worker.start_link(arg)
       # {BankingApp.Worker, arg},
+      # Start the Accounts supervisor
+      supervisor(BankingApp.Accounts.Supervisor, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
