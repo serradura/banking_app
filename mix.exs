@@ -45,6 +45,7 @@ defmodule BankingApp.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:eventstore, "~> 0.16.2"},
       {:commanded, "~> 0.18.1"},
+      {:commanded_ecto_projections, "~> 0.8.0"},
       {:commanded_eventstore_adapter, "~> 0.5.0"},
       {:uuid, "~> 1.1"},
       {:exconstructor, "~> 1.1"},
