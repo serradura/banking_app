@@ -46,8 +46,11 @@ defmodule BankingApp.MixProject do
       {:eventstore, "~> 0.16.2"},
       {:commanded, "~> 0.18.1"},
       {:commanded_eventstore_adapter, "~> 0.5.0"},
+      {:uuid, "~> 1.1"},
+      {:exconstructor, "~> 1.1"},
       {:comeonin, "~> 5.1"},
       {:bcrypt_elixir, "~> 2.0"},
+      {:ex_machina, "~> 2.3", only: :test},
     ]
   end
 
