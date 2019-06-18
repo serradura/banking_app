@@ -17,5 +17,16 @@ defmodule BankingApp.AccountsTest do
         user_attributes.password, user.hashed_password
       )
     end
+
+    @tag :integration
+    test "should fail with invalid data and return error" do
+      user_with_password = build(:user_with_password)
+
+      Accounts.register_user(user_with_password)
+
+      assert {:error, :validation_failure, errors} = Accounts.register_user(user_with_password)
+
+      assert errors == %{email: ["has already been taken"]}
+    end
   end
 end
