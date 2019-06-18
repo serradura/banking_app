@@ -3,9 +3,10 @@ defmodule BankingApp.Router do
 
   alias BankingApp.Accounts.Aggregates.User
   alias BankingApp.Accounts.Commands.RegisterUser
-  alias BankingApp.Support.Middleware.Validate
+  alias BankingApp.Support.Middleware.{Validate,Uniqueness}
 
   middleware Validate
+  middleware Uniqueness
 
   dispatch [RegisterUser], to: User, identity: :user_uuid
 end

@@ -19,14 +19,20 @@ defmodule BankingApp.AccountsTest do
     end
 
     @tag :integration
-    test "should fail with invalid data and return error" do
-      user_with_password = build(:user_with_password)
+    test "should fail when email already taken and return error" do
+      user_attrs = build(:user_with_password)
 
-      Accounts.register_user(user_with_password)
+      assert {:ok, %User{}} = Accounts.register_user(user_attrs)
+      assert {:error, :validation_failure, errors} = Accounts.register_user(user_attrs)
 
-      assert {:error, :validation_failure, errors} = Accounts.register_user(user_with_password)
+      assert Enum.member?(errors.email, "has already been taken")
+    end
 
-      assert errors == %{email: ["has already been taken"]}
+    @tag :integration
+    test "should fail when registering identical email at same time and return error" do
+      1..2
+      |> Enum.map(fn _ -> Task.async(fn -> Accounts.register_user(build(:user_with_password)) end) end)
+      |> Enum.map(&Task.await/1)
     end
   end
 end

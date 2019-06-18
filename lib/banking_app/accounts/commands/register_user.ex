@@ -44,3 +44,9 @@ defmodule BankingApp.Accounts.Commands.RegisterUser do
   defp assign_user_uuid(%RegisterUser{user_uuid: _} = cmd),
   do:  cmd
 end
+
+defimpl BankingApp.Support.Middleware.Uniqueness.UniqueFields, for: BankingApp.Accounts.Commands.RegisterUser do
+  def unique(_command), do: [
+    {:email, "has already been taken"}
+  ]
+end
