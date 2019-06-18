@@ -25,6 +25,10 @@ MIX_ENV=test mix ecto.create
 2. Run it.
 ```sh
 mix test
+
+# or run the command below to see
+# the test results with coverage statistics
+MIX_ENV=test mix coveralls
 ```
 
 ## Learn more

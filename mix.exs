@@ -10,7 +10,13 @@ defmodule BankingApp.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.html": :test,
+        "coveralls.detail": :test,
+      ]
     ]
   end
 
@@ -53,6 +59,7 @@ defmodule BankingApp.MixProject do
       {:comeonin, "~> 5.1"},
       {:bcrypt_elixir, "~> 2.0"},
       {:ex_machina, "~> 2.3", only: :test},
+      {:excoveralls, "~> 0.11.1", only: :test},
     ]
   end
 
