@@ -27,6 +27,14 @@ defmodule BankingAppWeb.ConnCase do
   end
 
   setup _tags do
+    :ok = Application.stop(:banking_app)
+    :ok = Application.stop(:commanded)
+    :ok = Application.stop(:eventstore)
+
+    BankingApp.Storage.reset!()
+
+    {:ok, _} = Application.ensure_all_started(:banking_app)
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end
