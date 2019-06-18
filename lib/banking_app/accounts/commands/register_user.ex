@@ -9,9 +9,17 @@ defmodule BankingApp.Accounts.Commands.RegisterUser do
   ]
 
   use ExConstructor
+  use Vex.Struct
 
-  alias BankingApp.Auth
+  alias BankingApp.{Auth,Accounts}
   alias BankingApp.Accounts.Commands.RegisterUser
+
+  validates :email, uniqueness: [
+    prerequisite: :email,
+    finder: &Accounts.get_user_by_email/1
+  ]
+  validates :user_uuid, uuid: true
+  validates :hashed_password, presence: true, string: true
 
   def build(%{} = attrs) do
     attrs

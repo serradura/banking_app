@@ -8,9 +8,11 @@ defmodule BankingApp.Accounts do
   alias BankingApp.Accounts.Commands.RegisterUser
   alias BankingApp.Accounts.Projections.User
 
-  def get_user(uuid) do
-    get_by(User, uuid: uuid)
-  end
+  def get_user(uuid),
+  do: get_by(User, uuid: uuid)
+
+  def get_user_by_email(email),
+  do: get_by(User, email: email)
 
   def register_user(attrs \\ %{}) do
     with register_user <- RegisterUser.build(attrs),
