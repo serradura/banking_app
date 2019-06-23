@@ -1,0 +1,6 @@
+.git
+.dockerignore
+
+_build/
+deps/
+cover/

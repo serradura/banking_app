@@ -1,0 +1,60 @@
+version: '3'
+
+volumes:
+  pg_read_model_data:
+    driver: local
+  pg_eventstore_data:
+    driver: local
+
+services:
+  # -----------
+  # PHOENIX APP
+  # -----------
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ./docker-entrypoint.sh
+    environment:
+      RM_PG_USERNAME: postgres
+      RM_PG_PASSWORD: postgres
+      RM_PG_HOSTNAME: pg_read_model
+      ES_PG_USERNAME: postgres
+      ES_PG_PASSWORD: postgres
+      ES_PG_HOSTNAME: pg_eventstore
+    depends_on:
+      - pg_read_model
+      - pg_eventstore
+    ports:
+      - "4000:4000"
+  # -------------------
+  # READ MODEL DATABASE
+  # -------------------
+  pg_read_model: &pg
+    image: postgres:9.6-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    restart: always
+    volumes:
+      - pg_read_model_data:/var/lib/postgresql/data
+  # -------------------
+  # EVENTSTORE DATABASE
+  # -------------------
+  pg_eventstore:
+    <<: *pg
+    volumes:
+      - pg_eventstore_data:/var/lib/postgresql/data
+  # ------
+  # PG WEB
+  # ------
+  pg_web:
+    image: sosedoff/pgweb
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - pg_read_model
+      - pg_eventstore
+    environment:
+      DATABASE_URL: 'postgres://postgres:postgres@pg_read_model:5432/postgres?sslmode=disable'

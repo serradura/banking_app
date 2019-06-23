@@ -2,15 +2,19 @@ use Mix.Config
 
 # Configure your database
 config :banking_app, BankingApp.Repo,
+  username: System.get_env("RM_PG_USERNAME") || System.get_env("USER"),
+  password: System.get_env("RM_PG_PASSWORD") || "",
+  hostname: System.get_env("RM_PG_HOSTNAME") || "localhost",
   database: "banking_app_dev",
-  hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
 config :eventstore, EventStore.Storage,
   serializer: Commanded.Serialization.JsonSerializer,
+  username: System.get_env("ES_PG_USERNAME") || System.get_env("USER"),
+  password: System.get_env("ES_PG_PASSWORD") || "",
+  hostname: System.get_env("ES_PG_HOSTNAME") || "localhost",
   database: "banking_app_eventstore_dev",
-  hostname: "localhost",
   pool_size: 10
 
 # For development, we disable any cache and enable

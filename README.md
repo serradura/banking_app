@@ -2,39 +2,34 @@
 
 To start your Phoenix server:
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Create the eventstore `mix do event_store.create, event_store.init`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+1. Do you have docker and docker compose Installed?
+    If not, head over to [Docker's website](https://docs.docker.com/install/) and install a version of Docker for your operating system of choice.
+2. Build the app `docker-compose build`
+3. Start it `docker-compose up`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+**PgWeb**
+
+By default the `docker-compose up` will exposes Pgweb (a web-based database browser for PostgreSQL) in [`localhost:8081`](http://localhost:8081)
+
+Available URL schemes to connect:
+1. `postgres://postgres:postgres@pg_read_model:5432/banking_app_dev?sslmode=disable`
+2. `postgres://postgres:postgres@pg_eventstore:5432/banking_app_eventstore_dev?sslmode=disable`
 
 ---
 
 To run the test suite:
 
-1. Setup (only once).
 ```sh
-MIX_ENV=test mix do event_store.create, event_store.init
-MIX_ENV=test mix ecto.create
-```
+docker-compose run web /bin/bash
 
-2. Run it.
-```sh
+# Run inside of the container
 mix test
 
 # or run the command below to see
 # the test results with coverage statistics
-MIX_ENV=test mix coveralls
+mix coveralls
+
+# open ./cover/excoveralls.html
 ```
-
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix

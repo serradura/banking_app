@@ -2,14 +2,18 @@ use Mix.Config
 
 # Configure your database
 config :banking_app, BankingApp.Repo,
+  username: System.get_env("RM_PG_USERNAME") || System.get_env("USER"),
+  password: System.get_env("RM_PG_PASSWORD") || "",
+  hostname: System.get_env("RM_PG_HOSTNAME") || "localhost",
   database: "banking_app_test",
-  hostname: "localhost",
   pool_size: 1
 
   config :eventstore, EventStore.Storage,
   serializer: Commanded.Serialization.JsonSerializer,
+  username: System.get_env("ES_PG_USERNAME") || System.get_env("USER"),
+  password: System.get_env("ES_PG_PASSWORD") || "",
+  hostname: System.get_env("ES_PG_HOSTNAME") || "localhost",
   database: "banking_app_eventstore_test",
-  hostname: "localhost",
   pool_size: 1
 
 # We don't run a server during test. If one is required,
