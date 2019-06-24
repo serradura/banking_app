@@ -28,7 +28,8 @@ defmodule BankingApp.Storage do
     """
     TRUNCATE TABLE
       accounts_users,
-      projection_versions
+      projection_versions,
+      bank_accounts
     RESTART IDENTITY
     CASCADE;
     """
