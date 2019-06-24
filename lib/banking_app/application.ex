@@ -17,6 +17,7 @@ defmodule BankingApp.Application do
       # Starts a worker by calling: BankingApp.Worker.start_link(arg)
       # {BankingApp.Worker, arg},
       # Start the Accounts supervisor
+      supervisor(BankingApp.Bank.Supervisor, []),
       supervisor(BankingApp.Accounts.Supervisor, []),
       # Enforce unique constraints
       worker(BankingApp.Support.Unique, [])
