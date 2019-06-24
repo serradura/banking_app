@@ -9,7 +9,8 @@ defmodule BankingApp.Bank.Supervisor do
 
   def init(_arg) do
     Supervisor.init([
-      Bank.Projectors.Account
+      Bank.Projectors.Account,
+      Bank.Workflows.CreateAccountFromUser,
     ], strategy: :one_for_one)
   end
 end
