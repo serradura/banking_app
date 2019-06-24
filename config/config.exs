@@ -39,6 +39,13 @@ config :vex,
      Vex.Validators
   ]
 
+config :banking_app, BankingAppWeb.Auth.Guardian,
+  issuer: "banking_app",
+  ttl: {30, :days},
+  allowed_drift: 2000,
+  verify_issuer: true,
+  secret_key: "cIT0dJ8/UMB8C8P8LoUrLY9sI8eEs8pACxv9byj58ZcN0oxGHACDG3t9G2+uOXHJ"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
