@@ -17,9 +17,9 @@ defmodule BankingApp.Accounts do
   do: get_by(Repo, User, email: email)
 
   def register_user(attrs \\ %{}) do
-    with register_user <- RegisterUser.build(attrs),
-         :ok           <- Router.dispatch(register_user, consistency: :strong) do
-      get_user(register_user.user_uuid)
+    with cmd <- RegisterUser.build(attrs),
+         :ok <- Router.dispatch(cmd, consistency: :strong) do
+      get_user(cmd.user_uuid)
     else
       reply -> reply
     end
