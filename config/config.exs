@@ -28,16 +28,16 @@ config :phoenix, :json_library, Jason
 config :comeonin, :bcrypt_log_rounds, 4
 
 config :commanded,
-   event_store_adapter: Commanded.EventStore.Adapters.EventStore
+  event_store_adapter: Commanded.EventStore.Adapters.EventStore
 
 config :commanded_ecto_projections,
-   repo: BankingApp.Repo
+  repo: BankingApp.Repo
 
 config :vex,
-   sources: [
+  sources: [
     BankingApp.Support.Validators,
      Vex.Validators
-   ]
+  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

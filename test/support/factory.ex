@@ -6,7 +6,7 @@ defmodule BankingApp.Factory do
       password: "serradura.rodrigo"}
   end
 
-   def user_factory do
+  def user_factory do
     %{hashed_password: "$2b$12$ysY/4oz52SCBOYbfywpBe.lJWOslcXVGBbuCcRWUaMPuFjUgp72hq"}
     |> Map.put(:email, build(:user_params).email)
   end
@@ -16,7 +16,7 @@ defmodule BankingApp.Factory do
     |> Map.merge(build(:user))
   end
 
-   def register_user_factory do
+  def register_user_factory do
     BankingApp.Accounts.Commands.RegisterUser
     |> struct(build(:user_with_password))
   end
