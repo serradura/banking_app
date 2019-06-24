@@ -3,13 +3,16 @@ defmodule BankingAppWeb.API.UserController do
 
   alias BankingApp.Accounts
 
+  import BankingAppWeb.Auth.JWT
+
   action_fallback BankingAppWeb.API.FallbackController
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, user} <- Accounts.register_user(user_params) do
+    with {:ok, user} <- Accounts.register_user(user_params),
+         {:ok, jwt}  <- generate_jwt(user) do
       conn
       |> put_status(:created)
-      |> render("show.json", user: user)
+      |> render("show.json", user: user, jwt: jwt)
     end
   end
 end

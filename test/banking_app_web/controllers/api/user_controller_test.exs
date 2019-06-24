@@ -14,12 +14,16 @@ defmodule BankingAppWeb.API.UserControllerTest do
     test "should create and return user when data is valid", %{conn: conn} do
       conn = post conn, Routes.user_path(conn, :create), user: build(:user_params)
       json = json_response(conn, 201)["data"]
+      token = json["token"]
       inserted_at = json["inserted_at"]
 
       assert json == %{
         "email" => "rodrigo.serradura@gmail.com",
-        "inserted_at" => inserted_at
+        "token" => token,
+        "inserted_at" => inserted_at,
       }
+
+      assert BankingAppWeb.Auth.JWT.valid?(token)
     end
 
     @tag :web

@@ -23,5 +23,6 @@ defmodule BankingAppWeb.Router do
     pipe_through :api
 
     resources "/users", UserController, only: [:create]
+    resources "/users/login", SessionController, only: [:create]
   end
 end
