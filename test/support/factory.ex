@@ -20,4 +20,13 @@ defmodule BankingApp.Factory do
     BankingApp.Accounts.Commands.RegisterUser
     |> struct(build(:user_with_password))
   end
+
+  def open_account_factory do
+    BankingApp.Bank.Commands.OpenAccount
+    |> struct(%{
+      user_uuid: UUID.uuid4(),
+      account_uuid: UUID.uuid4(),
+      account_code: "bb1c228a"
+    })
+  end
 end
