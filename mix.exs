@@ -59,6 +59,7 @@ defmodule BankingApp.MixProject do
       {:guardian, "~> 1.2"},
       {:comeonin, "~> 5.1"},
       {:bcrypt_elixir, "~> 2.0"},
+      {:money, "~> 1.4"},
       {:ex_machina, "~> 2.3", only: :test},
       {:excoveralls, "~> 0.11.1", only: :test},
     ]

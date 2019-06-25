@@ -46,6 +46,12 @@ config :banking_app, BankingAppWeb.Auth.Guardian,
   verify_issuer: true,
   secret_key: "cIT0dJ8/UMB8C8P8LoUrLY9sI8eEs8pACxv9byj58ZcN0oxGHACDG3t9G2+uOXHJ"
 
+config :money,
+  default_currency: :BRL,
+  separator: ".",
+  delimeter: ",",
+  symbol_space: true
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
