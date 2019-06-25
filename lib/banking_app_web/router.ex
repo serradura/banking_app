@@ -29,4 +29,10 @@ defmodule BankingAppWeb.Router do
     resources "/users", UserController, only: [:create]
     resources "/users/login", SessionController, only: [:create]
   end
+
+  scope "/api", BankingAppWeb.API do
+    pipe_through [:api, :auth]
+
+    resources "/account", AccountController, only: [:show], singleton: true
+  end
 end
