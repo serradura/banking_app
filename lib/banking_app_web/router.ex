@@ -13,6 +13,10 @@ defmodule BankingAppWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug BankingAppWeb.Auth.Pipeline
+  end
+
   scope "/", BankingAppWeb do
     pipe_through :browser
 
